@@ -22,6 +22,9 @@ const SummaryChart: React.FC<SummaryChartProps> = ({ expenses }) => {
     displayData.push({ name: 'Altro', value: otherValue });
   }
 
+  // Calculate total for percentage display
+  const totalValue = displayData.reduce((sum, item) => sum + item.value, 0);
+
   const formatCurrency = (val: number) => 
     new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(val);
 
@@ -47,7 +50,10 @@ const SummaryChart: React.FC<SummaryChartProps> = ({ expenses }) => {
               ))}
             </Pie>
             <Tooltip 
-              formatter={(value: any) => formatCurrency(Number(value))}
+              formatter={(value: number) => {
+                const percent = ((value / totalValue) * 100).toFixed(1);
+                return [`${formatCurrency(value)} (${percent}%)`, 'Costo Annuo'];
+              }}
               contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
             />
             <Legend verticalAlign="bottom" height={36}/>
