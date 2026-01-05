@@ -42,12 +42,12 @@ const SummaryChart: React.FC<SummaryChartProps> = ({ expenses }) => {
               paddingAngle={5}
               dataKey="value"
             >
-              {displayData.map((entry, index) => (
+              {displayData.map((_, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
             <Tooltip 
-              formatter={(value: number) => formatCurrency(value)}
+              formatter={(value: any) => formatCurrency(Number(value))}
               contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
             />
             <Legend verticalAlign="bottom" height={36}/>
