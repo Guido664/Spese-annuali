@@ -50,9 +50,10 @@ const SummaryChart: React.FC<SummaryChartProps> = ({ expenses }) => {
               ))}
             </Pie>
             <Tooltip 
-              formatter={(value: number) => {
-                const percent = ((value / totalValue) * 100).toFixed(1);
-                return [`${formatCurrency(value)} (${percent}%)`, 'Costo Annuo'];
+              formatter={(value: any) => {
+                const val = Number(value);
+                const percent = ((val / totalValue) * 100).toFixed(1);
+                return [`${formatCurrency(val)} (${percent}%)`, 'Costo Annuo'];
               }}
               contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
             />
